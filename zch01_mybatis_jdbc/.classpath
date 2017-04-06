@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.22-bin.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/mybatis-3.2.1.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/cglib-2.2.2.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/javassist-3.17.1-GA.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/slf4j-api-1.7.2.jar"/>
+	<classpathentry kind="lib" path="E:/ZEnv/ZLibrary/mybatis-3.2.1/lib/slf4j-log4j12-1.7.2.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>
