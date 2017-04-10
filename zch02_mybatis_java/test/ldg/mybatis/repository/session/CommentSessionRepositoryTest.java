@@ -34,11 +34,12 @@ public class CommentSessionRepositoryTest {
 	}
 
 	public void testUpdateComment() {
-		Long commentNo = 1L;
+		//Long commentNo = 1L;
 		String commentContent = "수정 test";
 
 		Comment comment = new Comment();
-		comment.setCommentNo(commentNo);
+		//comment.setCommentNo(commentNo);
+		comment.setCommentNo(8L);
 		comment.setCommentContent(commentContent);
 		Integer result = commentSessionRepository.updateComment(comment);
 
@@ -46,8 +47,9 @@ public class CommentSessionRepositoryTest {
 	}
 
 	public void testDeleteComment() {
-		Long commentNo = 1L;
-		Integer result = commentSessionRepository.deleteComment(commentNo);
+		//Long commentNo = 1L;
+		//Integer result = commentSessionRepository.deleteComment(commentNo);
+		Integer result = commentSessionRepository.deleteComment(8L);
 
 		System.out.println(result);
 	}
@@ -63,10 +65,10 @@ public class CommentSessionRepositoryTest {
 	public static void main(String[] args) {
 		CommentSessionRepositoryTest test = new CommentSessionRepositoryTest();
 
-		test.testSelectCommentByPrimaryKey();
-		test.testInsertComment();
-		test.testUpdateComment();
+		//test.testSelectCommentByPrimaryKey();
+		//test.testInsertComment();
+		//test.testUpdateComment();
 		test.testDeleteComment();
-		test.testSelectCommentByCondition();
+		//test.testSelectCommentByCondition();
 	}
 }

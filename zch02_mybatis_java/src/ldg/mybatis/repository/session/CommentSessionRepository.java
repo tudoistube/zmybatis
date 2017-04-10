@@ -26,6 +26,7 @@ public class CommentSessionRepository {
 	}
 
 	public Comment selectCommentByPrimaryKey(Long commentNo) {
+		//...105p.마이바티스 객체 생성.
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
 			return (Comment)sqlSession.selectOne(namespace + ".selectCommentByPrimaryKey", commentNo);

@@ -18,6 +18,10 @@
 		</environment>
 	</environments>
 	<mappers>
+		<!-- ...SQL 매핑시 확인 사항 :
+		        1. mybatis-config.xml :: mapper :: resource 속성값은 물리적인 파일경로와 일치해야 함.
+		        2. CommentMapXmlRepository.java 와 CommentMapper.xml 의 
+		           namespace 값이 일치해야 함.-->
 		<mapper resource="ldg/mybatis/repository/mapper/CommentMapper.xml" />
 	</mappers>
 </configuration>
