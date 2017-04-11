@@ -8,12 +8,16 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 public class CommentMapXmlRepository extends AbstractRepository {
-	private final String namespace = "ldg.mybatis.repository.mapper.CommentMapper1";
+	//private final String namespace = "ldg.mybatis.repository.mapper.CommentMapper1";	
+	//...157p.
+	private final String namespace = "ldg.mybatis.repository.mapper.CommentMapperWithResultMap1";
 
 	public Comment selectCommentByPrimaryKey(Long commentNo) {
 		SqlSession sqlSession = getSqlSessionFactory().openSession();
 		try {
-			String statement = namespace + ".selectCommentByPrimaryKey";
+			//String statement = namespace + ".selectCommentByPrimaryKey";
+			//...157p.
+			String statement = namespace + ".selectCommentByPrimaryKeyWithResultMap";
 			return (Comment)sqlSession.selectOne(statement, commentNo);
 		} finally {
 			sqlSession.close();

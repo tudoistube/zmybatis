@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldg.mybatis.repository.mapper.CommentMapperWithResultMap1">
+
+<!-- ...156p.resultMap : 결과 매핑을 사용하기 위한 가장 상위 엘리먼트.
+             id : 기본 키에 해당되는 값을 설정함.
+             result : 기본 키가 아닌 나머지 컬럼에 대해 매핑함.
+             constructor : setter() 또는 리플렉션을 통해 값을 설정하지 않고
+                           생성자를 통해 값을 설정할 때 사용함.
+             association : 1:1 관계를 처리함.
+             collection  : 1:N 관계를 처리함.
+             discriminator : 매핑 과정에서 조건을 지정해서 값을 설정할 때 사용함.
+             
+     ...159p.jdbcType : java.sql.Types 클래스. 
+             resultMap 엘리먼트에 컬럼과 대상 필드 및 setter 메서드의 규칙을 정의해주면
+             컬럼명과 필드명이 다르더라도 값을 설정할 수 있음.-->
+
+	<resultMap id="BaseCommentResultMap" type="ldg.mybatis.model.Comment">
+		<id column="comment_no" 	jdbcType="BIGINT" 		property="commentNo" />
+		<result column="user_id" 	jdbcType="VARCHAR" 		property="userId" />
+		<result column="reg_date" 	jdbcType="TIMESTAMP" 	property="regDate" />
+		<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+	</resultMap>
+	
+	
+<!-- ...161p.생성자를 통한 객체 생성.
+             불변 패턴의 하나로 불변 객체를 사용함.
+             불변 객체는 한 번 설정하면 그 상태를 변경할 수 없으므로 생성자를 사용해서 객체를
+             생성할 때 값을 설정하고, 불변 클래스에는 setter() 가 없음.
+             즉, 생성자를 사용하는 경우에는 setter() 를 사용할 수 없다고 이해할 것.
+             생성자의 파라미터를 설정할 때 idArg 와 arg 엘리먼트를 사용함.
+             idArg : 기본키.
+             arg   : 기본키가 아닌 컬럼. -->	
+	<resultMap id="ConstructorResultMap" type="ldg.mybatis.model.Comment">
+		<constructor>
+			<idArg column="comment_no" javaType="long" />
+			<arg column="user_id" javaType="string" />
+			<arg column="reg_date" javaType="date" />
+			<arg column="comment_content" javaType="string" />
+		</constructor>
+	</resultMap>
+
+
+<!-- ...170p.AssociationResultMap, AssociationResultMap1, AssociationResultMap2 는 같은 결과 매핑임. -->
+	<resultMap id="AssociationResultMap" type="ldg.mybatis.model.CommentUser">
+	
+		<id column="comment_no" jdbcType="BIGINT" property="commentNo" />
+		<result column="user_id" jdbcType="VARCHAR" property="userId" />
+		<result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />
+		<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+
+<!-- ...166p.association 엘리먼트의 property 속성 : 대상 객체의 setter 메서드명을 지정함. 
+             user 라는 클래스 필드에 해당하는 객체를 생성하고 setUser() 를 호출함.
+             id : 기본 키에 해당되는 값을 설정함.
+             result : 기본 키가 아닌 나머지 컬럼에 대해 매핑함.
+             column : 두 테이블 관계를 이어주는 참조 키.
+             javaType : 대상 객체의 타입.-->		
+		<association property="user" column="user_id" 
+									 javaType="ldg.mybatis.model.User">
+			<id property="userId" column="user_id" />
+			<result property="userName" column="user_name" />
+		</association>
+		
+	</resultMap>
+	
+	
+<!-- ...169p.각각의 클래스를 클래스 필드로 가지는 ResultMap 은 
+			 assoication 엘리먼트를 클래스 갯수만큼 사용함.
+             /zch04_mybatis_web/src/ldg/mybatis/model/CommentUser.java-->
+	<resultMap id="AssociationResultMap2" type="ldg.mybatis.model.CommentUser">
+	
+		<association property="comment" column="comment_no" 
+										javaType="ldg.mybatis.model.Comment" 
+										resultMap="ConstructorResultMap" >											
+			<id column="comment_no" jdbcType="BIGINT" property="commentNo" />			
+			<result column="user_id" jdbcType="VARCHAR" property="userId" />			
+			<result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />			
+			<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />			
+		</association>
+		
+		<association property="user" column="user_id" javaType="ldg.mybatis.model.User">
+			<id property="userId" column="user_id" />
+			<result property="userName" column="user_name" />			
+		</association>
+		
+	</resultMap>
+	
+<!-- ...169p.ConstructorResultMap 결과 매핑을 재사용해 정의한 결과 매핑. 
+			 assoication 엘리먼트를 클래스 갯수만큼 사용함.
+             /zch04_mybatis_web/src/ldg/mybatis/model/CommentUser.java-->	
+	<resultMap id="AssociationResultMap3" type="ldg.mybatis.model.CommentUser">
+	
+		<association property="comment" column="comment_no" 
+										javaType="ldg.mybatis.model.Comment" 
+										resultMap="ConstructorResultMap" />
+										
+		<association property="user" column="user_id" javaType="ldg.mybatis.model.User">
+			<id property="userId" column="user_id" />
+			<result property="userName" column="user_name" />
+		</association>
+		
+	</resultMap>
+	
+
+<!-- ...172p.동일한 테이블을 두 번 이상 사용하는 결과 매핑에 사용하기(columnPrefix).	
+			 마이바티스3.1부터 추가됨. -->
+	<resultMap id="ColumnPrefixResultMap" type="ldg.mybatis.model.CommentColumnPrefix">
+		<association property="comment1" resultMap="ConstructorResultMap" columnPrefix="c1_"></association>
+		<association property="comment2" resultMap="ConstructorResultMap" columnPrefix="c2_"></association>
+	</resultMap>
+
+
+<!-- ...176p.1:N 관계를 갖는 댓글과 답글 목록을 설정하는 결과 매핑.	
+			 1:1 관계와 차이점 : 설정하고자 하는 객체의 타입이 List 이고
+			                     이러한 타입을 처리하기 위해 collection 엘리먼트를 사용함. -->
+	<resultMap id="CollectionResultMap" type="ldg.mybatis.model.CommentReplies">
+		
+		<association property="comment" column="comment_no" 
+										javaType="ldg.mybatis.model.Comment" 
+										resultMap="ConstructorResultMap" >											
+			<id column="comment_no" jdbcType="BIGINT" property="commentNo" />			
+			<result column="user_id" jdbcType="VARCHAR" property="userId" />			
+			<result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />			
+			<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />			
+		</association>		
+		
+<!-- ...176p.property 속성 : setter() 의 이름이나 설정될 필드명을 선택함.
+			                 답글 목록을 설정하기 위해 setReplies() 를 사용하거나 
+			                 replies 필드에 설정하게 됨.
+			 ofType 속성 : 목록을 구성하는 객체의 타입을 지정함.
+			               실제 반환 타입은 List<Reply> 임. -->
+		<collection property="replies" ofType="ldg.mybatis.model.Reply">
+			<id property="replyNo" column="reply_no" />
+			<result property="userId" column="user_id" />
+			<result property="replyContent" column="reply_content" />
+			<result property="regDate" column="reg_date2" />
+		</collection>
+	</resultMap>
+<!-- ============================================================================= -->
+	
+	<cache />
+
+
+<!-- ...158p.한 개의 테이블을 사용하는 결과 매핑 : 
+             resultType 이 아닌 resultMap 을 사용함.
+             SELECT 문에서 ALIAS 사용하지 않음. -->
+
+	<!--
+	<select id="selectCommentByPrimaryKey" parameterType="long" resultMap="constructorResultMap"> 
+	 -->
+	<select id="selectCommentByPrimaryKeyWithResultMap" 
+	        parameterType="long" resultMap="BaseCommentResultMap">	 
+		SELECT 
+			comment_no,
+			user_id,
+			comment_content,
+			reg_date
+		FROM ztbl_comment 
+		WHERE comment_no = #{commentNo} 
+	</select>
+
+	<!-- ...161p.생성자를 통한 객체 생성. -->	
+	<select id="selectCommentByPrimaryKeyWithConstructor" 
+			parameterType="long" resultMap="ConstructorResultMap"> 
+		SELECT 
+			comment_no,
+			user_id,
+			comment_content,
+			reg_date
+		FROM ztbl_comment 
+		WHERE comment_no = #{commentNo} 
+	</select>
+	
+	<select id="selectCommentByPrimaryKeyAssociation" 
+			parameterType="long" resultMap="AssociationResultMap3"> 
+		SELECT
+		  c.comment_no,
+		  c.user_id,
+		  c.comment_content,
+		  c.reg_date,
+		  u.user_name
+		FROM ztbl_comment c, ztbl_user u
+		WHERE c.user_id = u.user_id
+		AND c.comment_no = #{commentNo} 
+	</select>
+		
+		
+	<select id="selectColumnPrefix" resultMap="ColumnPrefixResultMap"> 
+		SELECT
+		    c1.comment_no AS c1_comment_no,
+		    c1.user_id AS c1_user_id,
+		    c1.comment_content AS c1_comment_content,
+		    c1.reg_date AS c1_reg_date,
+		    c2.comment_no AS c2_comment_no,
+		    c2.user_id AS c2_user_id,
+		    c2.comment_content AS c2_comment_content,
+		    c2.reg_date AS c2_reg_date,
+		    r.reply_content,
+		    r.reg_date        AS reg_date2
+		FROM ztbl_comment c1,
+		     ztbl_comment c2,
+		    reply r
+		WHERE c1.comment_no = r.comment_no
+		      AND c1.comment_no = c2.comment_no
+		      AND c1.comment_no = #{commentNo} 
+	</select>
+	
+	<select id="selectCommentByPrimaryKeyCollection" 
+			parameterType="long" resultMap="CollectionResultMap"> 
+		SELECT
+		  c.comment_no,
+		  c.user_id,
+		  c.comment_content,
+		  c.reg_date,
+		  r.reply_no,
+		  r.reply_content,
+		  r.reg_date AS reg_date2
+		FROM ztbl_comment c, ztbl_reply r
+		WHERE c.comment_no = r.comment_no
+		AND c.comment_no = #{commentNo} 
+	</select>
+		
+	
+</mapper>
