@@ -137,7 +137,32 @@
 			<result property="replyContent" column="reply_content" />
 			<result property="regDate" column="reg_date2" />
 		</collection>
+	</resultMap>	
+
+
+	<resultMap id="discriminatorResultMap" type="Comment">
+		<id column="comment_no" 	jdbcType="BIGINT" 		property="commentNo" />
+		<result column="user_id" 	jdbcType="VARCHAR" 		property="userId" />
+		<result column="reg_date" 	jdbcType="TIMESTAMP" 	property="regDate" />
+		<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+		
+<!-- ...179p.discriminator 엘리먼트 : 동적으로 결과 매핑을 선택함.
+             javaType 속성 : 대상 컬럼의 자바 타입을 지정하여 마이바티스 내부에서
+                             값을 비교하게 함.
+			 column 속성 : 비교 대상이 되는 특정 컬럼을 지정함.
+			               여기서는 'user_id' 의 값이 'fromm0' 인 경우와 'manager' 인
+			               경우의 결과 매핑을 분기함. -->		
+		<discriminator javaType="string" column="user_id">
+			<case value="fromm0" resultMap="baseResultMap" />
+			<case value="manager" resultMap="constructorResultMap" />
+		</discriminator>
 	</resultMap>
+
+	<resultMap id="columnPrefixResultMap" type="ldg.mybatis.model.CommentColumnPrefix">
+		<association property="comment1" resultMap="constructorResultMap" columnPrefix="c1_"></association>
+		<association property="comment2" resultMap="constructorResultMap" columnPrefix="c2_"></association>
+	</resultMap>
+		
 <!-- ============================================================================= -->
 	
 	<cache />

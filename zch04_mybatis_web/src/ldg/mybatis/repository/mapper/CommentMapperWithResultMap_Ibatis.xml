@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldg.mybatis.repository.mapper.CommentMapperWithResultMap1">
+
+<!-- ...181p.Ibatis 에서는 type 속성 대신 class 속성을 사용함.
+             Ibatis 에서는 id 속성 대신 result 속성을 사용함.-->
+	<resultMap id="BaseCommentResultMap" class="ldg.mybatis.model.Comment">
+		<result column="comment_no"	jdbcType="BIGINT" 		property="commentNo" />
+		<result column="user_id" 	jdbcType="VARCHAR" 		property="userId" />
+		<result column="reg_date" 	jdbcType="TIMESTAMP" 	property="regDate" />
+		<result column="comment_content" jdbcType="VARCHAR" property="commentContent" />
+	</resultMap>
+	
+	<resultMap id="UserResultMap" class="ldg.mybatis.model.User">
+		<result column="user_id" 	property="userId" />
+		<result column="user_name" 	property="userName" />
+	</resultMap>	
+	
+
+
+<!-- ...181p.Ibatis 에서는 association 엘리먼트 대신 result 속성을 사용함. -->
+	<resultMap id="AssociationResultMap" class="ldg.mybatis.model.CommentUser">
+	
+		<result property="comment" resultMap="BaseCommentResultMap" />
+		<result property="user" resultMap="UserResultMap" />
+
+	</resultMap>	
+
+	
+	<resultMap id="ReplyResultMap" class="ldg.mybatis.model.Reply">
+	
+		<id property="replyId" column="reply_id" />
+		<result property="userId" column="user_id" />
+		<result property="replyContent" column="reply_content" />
+		<result property="regDate" column="user_date2" />
+
+	</resultMap>	
+	
+
+<!-- ...181p.Ibatis 에서는 collection 엘리먼트 대신 resultMap 에서 기준이 되는 
+             컬럼을 groupBy 속성에 정의함. -->
+	<resultMap id="CollectionResultMap" class="ldg.mybatis.model.CommentReplies"
+	                                    groupBy="reply_id">		
+	
+		<result property="commentNo" 	jdbcType="BIGINT" 		column="comment_no" />
+		<result property="userId" 		jdbcType="VARCHAR" 		column="user_id" />
+		<result property="regDate" 		jdbcType="TIMESTAMP" 	column="reg_date" />
+		<result property="commentContent" jdbcType="VARCHAR" 	column="comment_content" />
+		<result property="replies" 		resultMap="ReplyResultMap" />
+		
+	</resultMap>
+		
+	
+</mapper>
