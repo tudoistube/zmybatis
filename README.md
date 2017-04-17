@@ -2,9 +2,10 @@
 ===================================================================
 
 ## Folder Description  
-### zch01_mybatis_jdbc :: 마이바티스 변환 대상이 되는 JDBC 예제.  
-### zch02_mybatis_java :: 마이바티스 시작(2장) 및 마이바티스 CRUD(3장).  
-### zch04_mybatis_web :: 마이바티스 활용(4장) 및 실무 설정.  
+### zch01_mybatis_jdbc :: Mybatis 변환 대상이 되는 JDBC 예제.  
+### zch02_mybatis_java :: Mybatis 시작(2장) 및 Mybatis CRUD(3장).  
+### zch04_mybatis_web :: Mybatis 활용 및 실무 설정(4장).  
+### zch05_mybatis_spring :: Mybatis + Spring 활용 및 실무 설정(5장).  
 
 ## Reference Document : Self Summary on [Shared_MyBatis](https://drive.google.com/open?id=10BH3m-WYRYrzbCto1t9Vw5BLZyLQuAm-Pti-rjBSPfA "Example Sources by tudoistube@gmail" )  
 
