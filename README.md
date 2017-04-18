@@ -6,6 +6,7 @@
 ### zch02_mybatis_java :: Mybatis 시작(2장) 및 Mybatis CRUD(3장).  
 ### zch04_mybatis_web :: Mybatis 활용 및 실무 설정(4장).  
 ### zch05_mybatis_spring :: Mybatis + Spring 활용 및 실무 설정(5장).  
+### zch05_mybatis_spring_jdbc :: Mybatis + Spring + JDBC 활용 및 실무 설정(5장).  
 
 ## Reference Document : Self Summary on [Shared_MyBatis](https://drive.google.com/open?id=10BH3m-WYRYrzbCto1t9Vw5BLZyLQuAm-Pti-rjBSPfA "Example Sources by tudoistube@gmail" )  
 
