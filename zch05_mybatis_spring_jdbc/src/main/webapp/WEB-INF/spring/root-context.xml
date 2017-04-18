@@ -11,6 +11,15 @@
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<!-- log4jdbc 설정전
+		오라클.
+			드라이버 클래스명 : oracle.jdbc.driver.OracleDriver
+			JDBC URL          : jdbc:oracle:thin:@[SERVER_ADDRESS]:[PORT]:[DB_NAME]
+		MySql.
+			드라이버 클래스명 : oracle.mysql.jdbc.driver
+			JDBC URL          : jdbc:mysql://[SERVER_ADDRESS]:[PORT]:[DB_NAME]
+		MsSql.
+			드라이버 클래스명 : com.microsoft.SQL Server.jdbc.SQL ServerDriver
+			JDBC URL          : jdbc:SQL Server://[SERVER_ADDRESS]:[PORT]:databasename=[DB_NAME]
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://127.0.0.1:3306/zbook_ex"></property>
 		-->
